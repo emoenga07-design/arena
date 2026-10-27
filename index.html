@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloomberg Terminal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="terminal">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <span class="wordmark">BLOOMBERG</span>
+        <span class="sub">TERMINAL</span>
+      </div>
+      <div class="header-right">
+        <div class="clock" id="clock">--:--:--</div>
+        <div class="date" id="date">-- -- ----</div>
+        <div class="market-status">
+          <span class="dot live"></span>
+          <span>MARKET OPEN</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrolling ticker tape -->
+    <div class="tape-wrap">
+      <div class="tape-inner" id="tape"></div>
+    </div>
+
+    <!-- Body: left rail | main grid | right rail -->
+    <div class="body">
+      <nav class="rail rail-left">
+        <div class="rail-section">
+          <h3 class="rail-title">MARKETS</h3>
+          <ul class="rail-list" id="rail-markets"></ul>
+        </div>
+        <div class="rail-section">
+          <h3 class="rail-title">FUNCTIONS</h3>
+          <ul class="rail-list" id="rail-functions"></ul>
+        </div>
+      </nav>
+
+      <main class="grid">
+        <!-- World indices -->
+        <section class="panel panel-indices">
+          <div class="panel-head">
+            <span class="panel-title">WORLD INDICES</span>
+            <button class="btn-refresh" title="Refresh">↻</button>
+          </div>
+          <div class="panel-body" id="panel-indices"></div>
+        </section>
+
+        <!-- Top movers -->
+        <section class="panel panel-movers">
+          <div class="panel-head">
+            <span class="panel-title">TOP MOVERS</span>
+          </div>
+          <div class="panel-body" id="panel-movers"></div>
+        </section>
+
+        <!-- Watchlist -->
+        <section class="panel panel-watchlist wide">
+          <div class="panel-head">
+            <span class="panel-title">WATCHLIST <span class="count" id="watch-count">0</span></span>
+            <div class="watch-controls">
+              <input type="text" id="watch-search" placeholder="symbol / name" />
+              <button class="btn-refresh" title="Refresh">↻</button>
+            </div>
+          </div>
+          <div class="panel-body" id="panel-watchlist"></div>
+        </section>
+
+        <!-- Chart -->
+        <section class="panel panel-chart wide">
+          <div class="panel-head">
+            <span class="panel-title" id="chart-title">INTRADAY CHART</span>
+          </div>
+          <div class="panel-body chart-wrap">
+            <canvas id="chart" width="640" height="320"></canvas>
+            <div class="chart-legend" id="chart-legend"></div>
+          </div>
+        </section>
+
+        <!-- News -->
+        <section class="panel panel-news wide">
+          <div class="panel-head">
+            <span class="panel-title">TOP NEWS</span>
+          </div>
+          <div class="panel-body" id="panel-news"></div>
+        </section>
+      </main>
+
+      <nav class="rail rail-right">
+        <div class="rail-section">
+          <h3 class="rail-title">FOREX</h3>
+          <div class="rail-list" id="rail-fx"></div>
+        </div>
+        <div class="rail-section">
+          <h3 class="rail-title">CRYPTO</h3>
+          <div class="rail-list" id="rail-crypto"></div>
+        </div>
+        <div class="rail-section">
+          <h3 class="rail-title">COMMODITIES</h3>
+          <div class="rail-list" id="rail-commodities"></div>
+        </div>
+        <div class="rail-section">
+          <h3 class="rail-title">ECONOMIC CALENDAR</h3>
+          <div class="rail-list" id="rail-calendar"></div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Command line -->
+    <footer class="command-bar">
+      <div class="prompt">Michael &gt;</div>
+      <input
+        type="text"
+        id="cmd"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Type a symbol (e.g. AAPL US) or function (MARKETS, NEWS, HELP) then press Enter"
+      />
+      <div class="cmd-hints" id="cmd-hints"></div>
+    </footer>
+  </div>
+
+  <!-- Detail modal (injected by app) -->
+  <div id="modal-root"></div>
+
+  <script type="module" src="data.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
